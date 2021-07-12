@@ -5,34 +5,64 @@
 
 package ucf.assignments;
 
+import java.awt.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 
 public class TaskTDA {
 
+    DateTimeFormatter formatter =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    private String date;     // date task is due
     private String taskAction;  // item description
-    private LocalDate date;     // date task is due
-    private boolean isComplete; // flag for sorting
+    private CheckBox isComplete; // flag for sorting
 
-    public TaskTDA(String action, LocalDate date){
-        // use string for task action
 
+    public TaskTDA(LocalDate date, String action){
         // set date as date of input
+        this.date = date.format(formatter);
 
-        // set isComplete to false
+        // use string for task action
+        this.taskAction = action;
+
+        // set isComplete checkbox
+        this.isComplete = new CheckBox();
     }
 
-    // returns the date of a task as a string to display
-    public String getDate(){
-        return "";
+    @Override
+    public String toString(){
+        return String.format("%-10s %s", getDate(), getTaskAction());
     }
 
-    // returns the description of a task
-    public String getTaskAction(){
-        return "";
+
+    // setters and getters
+    public String getTaskAction() {
+        return taskAction;
     }
 
-    // returns true if it's completed; otherwise false
-    public boolean isComplete(){
-        return false;
+    public void setTaskAction(String taskAction) {
+
+        this.taskAction = taskAction;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String inputDate) {
+        this.date = inputDate;
+    }
+
+    public CheckBox getIsComplete(){
+        return isComplete;
+    }
+
+    public void setComplete(CheckBox complete) {
+        isComplete = complete;
     }
 }
